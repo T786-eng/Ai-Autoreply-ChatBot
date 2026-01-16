@@ -1,33 +1,74 @@
-# 🤖 Auto Reply AI Chatbot
+# 🤖 AI Chat Automation Bot (Gemini + PyAutoGUI)
 
-An intelligent, automated chatbot powered by Google Generative AI (Gemini) that analyzes chat history and generates witty, roasting responses in Hindi and English. Seamlessly integrates with WhatsApp Web via GUI automation for real-time interactions. 📱💬
 
-## ✨ Features
-- 🔍 **Real-Time Monitoring**: Continuously scans chat history for new messages.
-- 😂 **Humorous Responses**: Delivers funny roasts as "Naruto," a coder from India, blending Hindi and English.
-- 🖱️ **Automated Interactions**: Uses pyautogui for seamless GUI-based replying.
-- 🔧 **Customizable**: Easily adjust sender detection and response logic.
+## 📋 Overview
+This project is an automated chat assistant that integrates **Python desktop automation** with **Google's Gemini AI**. 
 
-## 📋 Prerequisites
-- 🐍 Python 3.8 or higher
-- 🔑 Google Generative AI API key (obtain from [Google AI Studio](https://makersuite.google.com/app/apikey))
-- 🌐 Chrome browser with WhatsApp Web open and positioned correctly
+Instead of relying on browser APIs (which are often restricted), this bot uses "Screen Scraping" techniques to interact with chat applications (like WhatsApp Web) exactly like a human would. It reads chat history visually, processes the context using a custom LLM persona, and types out a response automatically.
 
-## 🚀 Installation
-1. 📦 Install dependencies:  
-   ```bash
-   pip install -r requirements.txt
-   ```
-2. 🔧 Set your Google API key as an environment variable: `export GOOGLE_API_KEY=your_api_key_here` (or use a `.env` file with `python-dotenv`).
+## ✨ Key Features
+* **Computer Vision Simulation:** Uses `PyAutoGUI` to simulate mouse movements, clicks, and drag-selections.
+* **Generative AI Integration:** Connects to `google.generativeai` (Gemini 1.5 Flash) to generate intelligent, context-aware responses.
+* **Custom Persona Engine:** The bot is prompted to act as "Naruto," a coder from India who replies in a mix of Hindi and English with a witty, roasting style.
+* **Chat History Analysis:** Reads previous conversation context to ensure replies are relevant to specific senders (e.g., "Rohan Das").
 
-## 🎯 Usage
-1. 📱 Open WhatsApp Web in Chrome and position the window as per the coordinates in `bot.py`.
-2. ▶️ Run `python bot.py`.
-3. 🤖 The bot will monitor for new messages from the specified sender and auto-reply.
+## 🛠️ Tech Stack
+* **Language:** Python 3.x
+* **Automation:** `PyAutoGUI` (Mouse/Keyboard control)
+* **Clipboard Management:** `Pyperclip`
+* **AI Model:** Google Gemini API (1.5 Flash)
+* **OS Interaction:** `os`, `time`
 
-## ⚙️ Configuration
-- 📍 Adjust coordinates in `bot.py` for your screen setup.
-- 👤 Modify the sender name in `is_last_message_from_sender()` if needed.
+## ⚙️ Installation
 
-## ⚠️ Disclaimer
-This tool uses GUI automation, which may violate terms of service or be unethical. Use responsibly and at your own risk. Ensure compliance with platform policies. 🛡️
+1.  **Clone the Repository**
+    ```bash
+    git clone [https://github.com/T786-eng/Ai-Autoreply-ChatBot?tab=readme-ov-file]
+   
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    pip install pyautogui pyperclip google-generativeai
+    ```
+
+3.  **Set up API Key**
+    You need a Google Gemini API key. Set it as an environment variable:
+    ```bash
+    export GOOGLE_API_KEY="your_api_key_here"
+    # Or for Windows PowerShell:
+    # $env:GOOGLE_API_KEY="your_api_key_here"
+    ```
+
+## ⚠️ Configuration (Crucial Step)
+**Note:** This script relies on screen coordinates (X, Y) which depend on your specific screen resolution and window placement. Before running, you must calibrate the coordinates in `main.py`:
+
+1.  Open your chat application (e.g., WhatsApp Web) and place it on one side of the screen.
+2.  Use the following Python snippet to find the coordinates of your *Chrome Icon*, *Text Selection Area*, and *Text Input Box*:
+    ```python
+    import pyautogui
+    import time
+    while True:
+        print(pyautogui.position())
+        time.sleep(1)
+    ```
+3.  Update lines `18`, `24`, `25`, `29`, and `48` in the script with your specific coordinates.
+
+## 🚀 Usage
+1.  Open the target chat application.
+2.  Run the script:
+    ```bash
+    python main.py
+    ```
+3.  The bot will automatically:
+    * Click the browser.
+    * Select and copy the recent chat history.
+    * Check if the last message belongs to the target sender.
+    * Generate a "roast" response and send it.
+
+## 🔮 Future Improvements
+* **OCR Integration:** Replace drag-and-select with Optical Character Recognition (Tesseract) to read text without moving the mouse.
+* **Dynamic Element Finding:** Use image recognition to find the "Send" button and "Input Box" regardless of screen resolution.
+
+## 📄 License
+This project is open-source.
