@@ -23,7 +23,7 @@ Instead of relying on browser APIs (which are often restricted), this bot uses "
 
 1.  **Clone the Repository**
     ```bash
-    git clone [https://github.com/T786-eng/Ai-Autoreply-ChatBot?tab=readme-ov-file]
+    git clone [https://github.com/T786-eng/Ai-Autoreply-ChatBot]
    
     ```
 
